@@ -1,7 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+    background: aliceblue;
+}
+
 h1 {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size:2.5rem;
     color:darkslategray;
-    text-shadow: 5px 0 0 gray;
+    text-shadow: 20px 19px 6px gray;
+    font-family: 'Sigmar One', cursive;
+}
+
+.container {
+    text-align: center;
+}
+
+.ingredients {
+    background: darkslategray;
+    width: 60%;
+    margin: 100px auto;
+    border-radius: 50px;
+    box-shadow: 20px 19px 6px gray;;
+    border: 2px solid white;
+}
+
+.oneingredient {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: white;
+    padding: 20px 60px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.oneingredient :hover{
+    color:gold;
 }
