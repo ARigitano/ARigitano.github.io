@@ -18,19 +18,20 @@ h1 {
     text-align: center;
 }
 
+.flex {
+    display: flex;
+}
+
 .ingredients {
-    background: darkslategray;
-    width: 60%;
+    width: 400px;
     margin: 100px auto;
     border-radius: 50px;
-    box-shadow: 20px 19px 6px gray;;
-    border: 2px solid white;
+    box-shadow: 4px 4px 6px gray;;
+    border: 2px solid black;
 }
 
 .oneingredient {
     font-size: 1.5rem;
-    letter-spacing: 2px;
-    color: white;
     padding: 20px 60px;
     font-family: 'Poppins', sans-serif;
 }
