@@ -39,3 +39,9 @@ h1 {
 .oneingredient :hover{
     color:gold;
 }
+
+@media screen and (max-width:1000px){
+    .flex{
+        display: block;
+    }
+}
