@@ -18,10 +18,38 @@ require_once 'includes/database.php';
     </header>
 
     <main>
+    <?php
+    //Undefined variable $conn l26
+    /*
+    function DisplayIngredients($ingredientType) 
+    {
+        $sql = "SELECT * FROM ingredients WHERE type=$ingredientType ORDER by name ASC";
+        $result = mysqli_query($conn, $sql);
+        $rowCount = mysqli_num_rows($result);
+
+        if($rowCount > 0) 
+        {
+            while ($row = mysqli_fetch_assoc($result)) 
+            {
+                $nameNoSpaces = str_replace(' ', '', $row['name']);
+                echo "<div class=\"oneingredient\">";
+                echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name={$nameNoSpaces} value={$nameNoSpaces}>";
+                echo"<label for={$nameNoSpaces}>{$row['name']}</label>";
+                echo"</div>";
+            }
+        }
+        else 
+        {
+            echo "No results found";
+        }
+    }
+    */
+    ?>
         <div class = "flex">
     <div class="ingredients">
         <form>
         <?php
+        //DisplayIngredients('AlcoholStrong');
         $sql = "SELECT * FROM ingredients WHERE type='AlcoholStrong' ORDER by name ASC";
         $result = mysqli_query($conn, $sql);
         $rowCount = mysqli_num_rows($result);
