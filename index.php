@@ -1,3 +1,6 @@
+<?php
+require_once 'includes/database.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +20,23 @@
     <main>
         <div class = "flex">
     <div class="ingredients">
+    <?php
+        $sql = "SELECT * FROM ingredients WHERE type='AlcoholStrong' ORDER by name ASC";
+        $result = mysqli_query($conn, $sql);
+        $rowCount = mysqli_num_rows($result);
+
+        if($rowCount > 0) 
+        {
+            while ($row = mysqli_fetch_assoc($result)) 
+            {
+                echo $row['name'] . "<br>";
+            }
+        }
+        else 
+        {
+            echo "No results found";
+        }
+    ?>
         <form>
             <div class="oneingredient">
             <input type="checkbox" class="checky" id="whiskey" name="whiskey" value="Whiskey">
@@ -62,6 +82,23 @@
     </div>
 
     <div class="ingredients">
+    <?php
+        $sql = "SELECT * FROM ingredients WHERE type='AlcoholLow' ORDER by name ASC";
+        $result = mysqli_query($conn, $sql);
+        $rowCount = mysqli_num_rows($result);
+
+        if($rowCount > 0) 
+        {
+            while ($row = mysqli_fetch_assoc($result)) 
+            {
+                echo $row['name'] . "<br>";
+            }
+        }
+        else 
+        {
+            echo "No results found";
+        }
+    ?>
         <form>
             <div class="oneingredient">
             <input type="checkbox" id="whiskey" name="whiskey" value="Whiskey">
@@ -107,6 +144,23 @@
     </div>
 
     <div class="ingredients">
+    <?php
+        $sql = "SELECT * FROM ingredients WHERE type='Soft' ORDER by name ASC";
+        $result = mysqli_query($conn, $sql);
+        $rowCount = mysqli_num_rows($result);
+
+        if($rowCount > 0) 
+        {
+            while ($row = mysqli_fetch_assoc($result)) 
+            {
+                echo $row['name'] . "<br>";
+            }
+        }
+        else 
+        {
+            echo "No results found";
+        }
+    ?>
         <form>
             <div class="oneingredient">
             <input type="checkbox" id="whiskey" name="whiskey" value="Whiskey">
@@ -152,6 +206,23 @@
     </div>
 
     <div class="ingredients">
+    <?php
+        $sql = "SELECT * FROM ingredients WHERE type='Other' ORDER by name ASC";
+        $result = mysqli_query($conn, $sql);
+        $rowCount = mysqli_num_rows($result);
+
+        if($rowCount > 0) 
+        {
+            while ($row = mysqli_fetch_assoc($result)) 
+            {
+                echo $row['name'] . "<br>";
+            }
+        }
+        else 
+        {
+            echo "No results found";
+        }
+    ?>
         <form>
             <div class="oneingredient">
             <input type="checkbox" id="whiskey" name="whiskey" value="Whiskey">
@@ -209,6 +280,8 @@
 
 
     </div>
+
+
     </main>
     
 </body>
