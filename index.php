@@ -19,6 +19,9 @@ require_once 'includes/database.php';
 
     <main>
     <?php
+
+    $ingredientsHave = [];
+
     //Undefined variable $conn l26
     /*
     function DisplayIngredients($ingredientType) 
@@ -45,9 +48,9 @@ require_once 'includes/database.php';
     }
     */
     ?>
-        <div class = "flex">
+    <div class = "flex">
     <div class="ingredients">
-        <form>
+        <form action="#">
         <?php
         //DisplayIngredients('AlcoholStrong');
         $sql = "SELECT * FROM ingredients WHERE type='AlcoholStrong' ORDER by name ASC";
@@ -60,15 +63,21 @@ require_once 'includes/database.php';
             {
                 $nameNoSpaces = str_replace(' ', '', $row['name']);
                 echo "<div class=\"oneingredient\">";
-                echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name={$nameNoSpaces} value={$nameNoSpaces}>";
+                if($row['have'] != 0)
+                    echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces} checked>";
+                else 
+                echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces}>";
                 echo"<label for={$nameNoSpaces}>{$row['name']}</label>";
                 echo"</div>";
+
+                array_push($ingredientsHave, $row['name']);
             }
         }
         else 
         {
             echo "No results found";
         }
+        //$ingredientChosen = $_POST["ingredientName"];
         ?>
         </form>
     </div>
@@ -161,7 +170,7 @@ require_once 'includes/database.php';
             <p>Rhum, Cola</p>
         </div>
     </div>
-
+        <script src="ingredients.js"></script>
 
     </div>
 
