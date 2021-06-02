@@ -20,6 +20,7 @@ require_once 'includes/database.php';
     <main>
     <?php
 
+
     $ingredientsHave = [];
 
     //Undefined variable $conn l26
@@ -49,8 +50,9 @@ require_once 'includes/database.php';
     */
     ?>
     <div class = "flex">
+    <form method="POST" action="" class = "flex">
     <div class="ingredients">
-        <form action="#">
+        
         <?php
         //DisplayIngredients('AlcoholStrong');
         $sql = "SELECT * FROM ingredients WHERE type='AlcoholStrong' ORDER by name ASC";
@@ -79,11 +81,10 @@ require_once 'includes/database.php';
         }
         //$ingredientChosen = $_POST["ingredientName"];
         ?>
-        </form>
     </div>
 
     <div class="ingredients">
-        <form>
+
         <?php
         $sql = "SELECT * FROM ingredients WHERE type='AlcoholLow' ORDER by name ASC";
         $result = mysqli_query($conn, $sql);
@@ -105,11 +106,9 @@ require_once 'includes/database.php';
             echo "No results found";
         }
         ?>
-        </form>
     </div>
 
     <div class="ingredients">
-        <form>
         <?php
         $sql = "SELECT * FROM ingredients WHERE type='Soft' ORDER by name ASC";
         $result = mysqli_query($conn, $sql);
@@ -131,11 +130,9 @@ require_once 'includes/database.php';
             echo "No results found";
         }
         ?>
-        </form>
     </div>
 
     <div class="ingredients">
-        <form>
         <?php
         $sql = "SELECT * FROM ingredients WHERE type='Other' ORDER by name ASC";
         $result = mysqli_query($conn, $sql);
@@ -157,8 +154,9 @@ require_once 'includes/database.php';
             echo "No results found";
         }
         ?>
-        </form>
     </div>
+    <input type="submit" name="validate" value="Save ingredients/Search cocktails">
+    </form>
 
     <div class="cocktails">
         <div class ="onecocktail">
@@ -170,7 +168,7 @@ require_once 'includes/database.php';
             <p>Rhum, Cola</p>
         </div>
     </div>
-        <script src="ingredients.js"></script>
+        <!--<script src="ingredients.js"></script>-->
 
     </div>
 
@@ -179,3 +177,16 @@ require_once 'includes/database.php';
     
 </body>
 </html>
+
+<?php
+if(isset($_POST['validate'])) 
+{
+    $chosenIngredients = $_POST['ingredientName'];
+    $arrayLenght = count($chosenIngredients);
+
+    foreach($chosenIngredients as $value) 
+    {
+        mysqli_query($conn, "UPDATE ingredients SET have='1' WHERE name='$value'");
+    }
+}
+?>

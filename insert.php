@@ -10,7 +10,6 @@
         $name = $_POST['name'];
         $have = $_POST['have'];
 
-        mysqli_query("UPDATE ingredients SET have='$have' WHERE name='$name'));
+        mysqli_query("UPDATE ingredients SET have='$have' WHERE name='$name'");
     }
-
 ?>
