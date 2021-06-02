@@ -1,7 +1,9 @@
 <?php
-    var_dump($_POST);
+    //var_dump($_POST);
     
-    /*require_once 'includes/database.php';
+    require_once 'includes/database.php';
+
+    console.log("yoo");
 
     if(isset($_POST[])) 
     {
@@ -9,6 +11,6 @@
         $have = $_POST['have'];
 
         mysqli_query("UPDATE ingredients SET have='$have' WHERE name='$name'));
-    }*/
+    }
 
 ?>

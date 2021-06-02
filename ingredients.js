@@ -30,9 +30,14 @@ for(var i = 0; i < checkboxes.length; i++)
             }
         }
 
-        ajaxRequest.open('POST', '/insert-ingredient.php', true);
-        ajaxRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        ajaxRequest.send("name='Champagne'&have=1");
+        ajaxRequest.open('POST', './insert.php', true);
+
+        var data = new FormData();
+        data.append('checkboxe', checkboxe.value);
+        ajaxRequest.send(data);
+
+        //ajaxRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        //ajaxRequest.send("name='checkboxe.name'&have=1");
     })
 }
 
