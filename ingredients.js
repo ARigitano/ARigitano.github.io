@@ -1,35 +1,40 @@
 var ajaxRequest;
 
-if(window.XMLHttpRequest) 
-{
-    ajaxRequest = new XMLHttpRequest();
-}
-else 
-{
-    ajaRequest = ActiveXObject("Microsoft.XMLHTTP");
-}
+
 
 var checkboxes = document.querySelectorAll('.checky');
 
-checkboxes.addEventListener('click', function(e) 
+for(var i = 0; i < checkboxes.length; i++) 
 {
-
-})
-
-if(ajaxRequest.readyState === 4) 
-{
-    //data
-
-    if(ajaxRequest.status === 200) 
+    var checkboxe = checkboxes[i];
+    checkboxe.addEventListener('click', function(e) 
     {
-        //more data
-    }
-    else 
-    {
-        console.log("Can't contact server");
-    }
+        if(window.XMLHttpRequest) 
+        {
+            ajaxRequest = new XMLHttpRequest();
+        }
+        else 
+        {
+            ajaRequest = ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if(ajaxRequest.readyState === 4) 
+        {
+            if(ajaxRequest.status === 200) 
+            {
+                
+            }
+            else 
+            {
+                console.log("Can't contact server");
+            }
+        }
+
+        ajaxRequest.open('POST', '/insert-ingredient.php', true);
+        ajaxRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        ajaxRequest.send("name='Champagne'&have=1");
+    })
 }
 
-ajaxRequest.open('POST', '/insert-ingredient.php', true);
-ajaxRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-ajaxRequest.send("name=dsd"+"&have=0");
+
+
