@@ -21,6 +21,8 @@ require_once 'includes/database.php';
     <?php
 
 
+
+
     $ingredientsHave = [];
 
     //Undefined variable $conn l26
@@ -65,8 +67,10 @@ require_once 'includes/database.php';
             {
                 $nameNoSpaces = str_replace(' ', '', $row['name']);
                 echo "<div class=\"oneingredient\">";
-                if($row['have'] != 0)
+                if($row['have'] != 0) {
                     echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces} checked>";
+                    array_push($ingredientsHave, $row['name']);
+                }
                 else 
                 echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces}>";
                 echo"<label for={$nameNoSpaces}>{$row['name']}</label>";
@@ -96,7 +100,12 @@ require_once 'includes/database.php';
             {
                 $nameNoSpaces = str_replace(' ', '', $row['name']);
                 echo "<div class=\"oneingredient\">";
-                echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name={$nameNoSpaces} value={$nameNoSpaces}>";
+                if($row['have'] != 0) {
+                    echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces} checked>";
+                    array_push($ingredientsHave, $row['name']);
+                }
+                else 
+                echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces}>";
                 echo"<label for={$nameNoSpaces}>{$row['name']}</label>";
                 echo"</div>";
             }
@@ -120,7 +129,12 @@ require_once 'includes/database.php';
             {
                 $nameNoSpaces = str_replace(' ', '', $row['name']);
                 echo "<div class=\"oneingredient\">";
-                echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name={$nameNoSpaces} value={$nameNoSpaces}>";
+                if($row['have'] != 0) {
+                    echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces} checked>";
+                    array_push($ingredientsHave, $row['name']);
+                }
+                else 
+                echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces}>";
                 echo"<label for={$nameNoSpaces}>{$row['name']}</label>";
                 echo"</div>";
             }
@@ -144,7 +158,12 @@ require_once 'includes/database.php';
             {
                 $nameNoSpaces = str_replace(' ', '', $row['name']);
                 echo "<div class=\"oneingredient\">";
-                echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name={$nameNoSpaces} value={$nameNoSpaces}>";
+                if($row['have'] != 0) {
+                    echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces} checked>";
+                    array_push($ingredientsHave, $row['name']);
+                }
+                else 
+                echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces}>";
                 echo"<label for={$nameNoSpaces}>{$row['name']}</label>";
                 echo"</div>";
             }
@@ -160,6 +179,49 @@ require_once 'includes/database.php';
 
     <div class="cocktails">
         <div class ="onecocktail">
+        <?php
+        $sql = "SELECT * FROM cocktails ORDER by name ASC";
+        $result = mysqli_query($conn, $sql);
+        $rowCount = mysqli_num_rows($result);
+
+        if($rowCount > 0) 
+        {
+            while ($row = mysqli_fetch_assoc($result)) 
+            {
+                $ingredientsUnparsed = $row['ingredients'];
+                $ingredientsArray = explode(';', $ingredientsUnparsed);
+
+                foreach($ingredientsArray as $ingredientInArray) 
+                {
+                    $ingredientsInCommon = [];
+
+                    foreach($ingredientsHave as $ingredientHave) 
+                    {
+                        if($ingredientInArray == $ingredientHave) 
+                        {
+                            array_push($ingredientsInCommon, $ingredientInArray);
+                            break;
+                        }
+                        else
+                        {
+                            echo $ingredientInArray;
+                            echo $ingredientHave;
+                            echo "<br>";
+                        }
+                    }
+                }
+
+                if(count($ingredientsArray) == count($ingredientsInCommon)) 
+                {
+                    echo "ok";
+                }
+            }
+        }
+        else 
+        {
+            echo "No results match";
+        }
+        ?>
             <h2>Vodka Orange</h2>
             <p>Vodka, Orange</p>
         </div>
@@ -179,6 +241,7 @@ require_once 'includes/database.php';
 </html>
 
 <?php
+
 if(isset($_POST['validate'])) 
 {
     $chosenIngredients = $_POST['ingredientName'];
@@ -189,4 +252,5 @@ if(isset($_POST['validate']))
         mysqli_query($conn, "UPDATE ingredients SET have='1' WHERE name='$value'");
     }
 }
+
 ?>
