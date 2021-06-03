@@ -178,7 +178,7 @@ require_once 'includes/database.php';
     </form>
 
     <div class="cocktails">
-        <div class ="onecocktail">
+        
         <?php
         $sql = "SELECT * FROM cocktails ORDER by name ASC";
         $result = mysqli_query($conn, $sql);
@@ -191,10 +191,10 @@ require_once 'includes/database.php';
                 $ingredientsUnparsed = $row['ingredients'];
                 $ingredientsArray = explode(';', $ingredientsUnparsed);
 
+                $ingredientsInCommon = [];
+
                 foreach($ingredientsArray as $ingredientInArray) 
                 {
-                    $ingredientsInCommon = [];
-
                     foreach($ingredientsHave as $ingredientHave) 
                     {
                         if($ingredientInArray == $ingredientHave) 
@@ -202,18 +202,15 @@ require_once 'includes/database.php';
                             array_push($ingredientsInCommon, $ingredientInArray);
                             break;
                         }
-                        else
-                        {
-                            echo $ingredientInArray;
-                            echo $ingredientHave;
-                            echo "<br>";
-                        }
                     }
                 }
 
                 if(count($ingredientsArray) == count($ingredientsInCommon)) 
                 {
-                    echo "ok";
+                    echo "<div class =\"onecocktail\">";
+                    echo "<h2>{$row['name']}</h2>";
+                    echo "<p>{$ingredientsUnparsed}</p>";
+                    echo "</div>";
                 }
             }
         }
@@ -222,13 +219,6 @@ require_once 'includes/database.php';
             echo "No results match";
         }
         ?>
-            <h2>Vodka Orange</h2>
-            <p>Vodka, Orange</p>
-        </div>
-        <div class ="onecocktail">
-            <h2>Rhum Cola</h2>
-            <p>Rhum, Cola</p>
-        </div>
     </div>
         <!--<script src="ingredients.js"></script>-->
 
