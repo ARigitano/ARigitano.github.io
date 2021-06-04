@@ -11,12 +11,16 @@
 <?php
 require_once 'includes/database.php';
 
-$ingredientsHave = [];
-
     if(isset($_POST['validate'])) 
     {
-        $chosenIngredients = $_POST['ingredientName'];
-        //$arrayLenght = count($chosenIngredients);
+        if(isset($_POST['ingredientName'])) 
+        {
+            $chosenIngredients = $_POST['ingredientName'];
+        }
+        else 
+        {
+            $chosenIngredients = [];
+        }
 
         foreach($chosenIngredients as $value) 
         {
@@ -26,12 +30,14 @@ $ingredientsHave = [];
         $hiddenIngredients = $_POST['ingredientHidden'];
 
         foreach($hiddenIngredients as $ingredientID) {
-            if(!in_array($ingredientID, $chosenIngredients)){
-                mysqli_query($conn, "UPDATE ingredients SET have='0' WHERE name='$ingredientID'");
-                echo $ingredientID;
+            $nameFixed = str_replace('/', '', $ingredientID);
+            if(!in_array($nameFixed, $chosenIngredients)){
+                mysqli_query($conn, "UPDATE ingredients SET have='0' WHERE name='$nameFixed'");
             }
        }
     }
+
+    $ingredientsHave = [];
     
     function DisplayIngredients($ingredientType) 
     {
@@ -139,7 +145,9 @@ $ingredientsHave = [];
                 {
                     echo "<div class =\"onecocktail\">";
                     echo "<h2>{$row['name']}</h2>";
-                    echo "<p>{$ingredientsUnparsed}</p>";
+                    $words = preg_replace('/(?<!\ )[A-Z]/', ' $0', $ingredientsUnparsed);
+                    $namePrepared = str_replace(';', ', ', $words);
+                    echo "<p>{$namePrepared}</p>";
                     echo "</div>";
                 }
             }
