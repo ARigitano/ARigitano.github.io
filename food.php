@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cocktails Site</title>
+    <title>Food Site</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -24,7 +24,7 @@ require_once 'includes/database.php';
 
         foreach($chosenIngredients as $value) 
         {
-            mysqli_query($conn, "UPDATE ingredients SET have='1' WHERE name='$value'");
+            mysqli_query($conn, "UPDATE ingredientsfood SET have='1' WHERE name='$value'");
         }
 
         $hiddenIngredients = $_POST['ingredientHidden'];
@@ -32,7 +32,7 @@ require_once 'includes/database.php';
         foreach($hiddenIngredients as $ingredientID) {
             $nameFixed = str_replace('/', '', $ingredientID);
             if(!in_array($nameFixed, $chosenIngredients)){
-                mysqli_query($conn, "UPDATE ingredients SET have='0' WHERE name='$nameFixed'");
+                mysqli_query($conn, "UPDATE ingredientsfood SET have='0' WHERE name='$nameFixed'");
             }
        }
     }
@@ -43,7 +43,7 @@ require_once 'includes/database.php';
     {
         include 'includes/database.php';
 
-        $sql = "SELECT * FROM ingredients WHERE type='$ingredientType' ORDER by name ASC";
+        $sql = "SELECT * FROM ingredientsfood WHERE type='$ingredientType' ORDER by name ASC";
         $result = mysqli_query($conn, $sql);
         $rowCount = mysqli_num_rows($result);
 
@@ -56,7 +56,6 @@ require_once 'includes/database.php';
                 $nameNoSpaces = $row['name'];
                 echo "<div class=\"oneingredient\">";
 
-                echo "<div class=\"selection\">";
                 if($row['have'] != 0) {
                     echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces} checked>";
                     array_push($GLOBALS['ingredientsHave'], $row['name']);
@@ -66,7 +65,6 @@ require_once 'includes/database.php';
                 echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces}>";
                 }
                 echo"<input type=\"hidden\" name=\"ingredientHidden[]\" value={$nameNoSpaces}/>";
-                echo "</div>";
 
                 echo"<label for={$nameNoSpaces}>{$words}</label>";
                 echo"</div>";
@@ -80,7 +78,7 @@ require_once 'includes/database.php';
 ?>
     <header>
         <div class="container">
-                <h1>Cocktails Site</h1>
+                <h1>Food Site</h1>
         </div>
     </header>
 
@@ -112,13 +110,13 @@ require_once 'includes/database.php';
         DisplayIngredients('Other');
         ?>
     </div>
-    <input type="submit" name="validate" value="Save ingredients/Search cocktails">
+    <input type="submit" name="validate" value="Save ingredients/Search recipes">
     </form>
 
-    <div class="cocktails">
+    <div class="recipes">
         
         <?php
-        $sql = "SELECT * FROM cocktails ORDER by name ASC";
+        $sql = "SELECT * FROM recipes ORDER by name ASC";
         $result = mysqli_query($conn, $sql);
         $rowCount = mysqli_num_rows($result);
 
