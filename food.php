@@ -79,6 +79,7 @@ require_once 'includes/database.php';
     <header>
         <div class="container">
                 <h1>Food Site</h1>
+                <a href="index.php">Cocktails</a>
         </div>
     </header>
 
@@ -88,20 +89,20 @@ require_once 'includes/database.php';
     <div class="ingredients">
         
         <?php
-        DisplayIngredients('AlcoholStrong');
+        DisplayIngredients('Meat');
         ?>
     </div>
 
     <div class="ingredients">
 
         <?php
-        DisplayIngredients('AlcoholLow');
+        DisplayIngredients('Vegetable');
         ?>
     </div>
 
     <div class="ingredients">
         <?php
-        DisplayIngredients('Soft');
+        DisplayIngredients('Spice');
         ?>
     </div>
 
@@ -113,7 +114,7 @@ require_once 'includes/database.php';
     <input type="submit" name="validate" value="Save ingredients/Search recipes">
     </form>
 
-    <div class="recipes">
+    <div class="cocktails">
         
         <?php
         $sql = "SELECT * FROM recipes ORDER by name ASC";

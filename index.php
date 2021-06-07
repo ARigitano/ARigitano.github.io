@@ -56,7 +56,6 @@ require_once 'includes/database.php';
                 $nameNoSpaces = $row['name'];
                 echo "<div class=\"oneingredient\">";
 
-                echo "<div class=\"selection\">";
                 if($row['have'] != 0) {
                     echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces} checked>";
                     array_push($GLOBALS['ingredientsHave'], $row['name']);
@@ -66,7 +65,6 @@ require_once 'includes/database.php';
                 echo"<input type=\"checkbox\" class=\"checky\" id={$nameNoSpaces} name=\"ingredientName[]\" value={$nameNoSpaces}>";
                 }
                 echo"<input type=\"hidden\" name=\"ingredientHidden[]\" value={$nameNoSpaces}/>";
-                echo "</div>";
 
                 echo"<label for={$nameNoSpaces}>{$words}</label>";
                 echo"</div>";
@@ -81,6 +79,7 @@ require_once 'includes/database.php';
     <header>
         <div class="container">
                 <h1>Cocktails Site</h1>
+                <a href="food.php">Food</a>
         </div>
     </header>
 
