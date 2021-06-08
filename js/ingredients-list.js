@@ -10,7 +10,7 @@ class IngredientsList extends React.Component {
     }
 
     render() {
-        return React.createElement('div', {className: 'ingredients'}, '<?php echo \"haha\"; ?>');
+        return React.createElement('div', {className: 'ingredients'});
     }
 }
 
